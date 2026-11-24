@@ -1,4 +1,4 @@
-# Cómo publicar en Puente Bursátil
+# Cómo publicar en WallStreetDailyNews.cl
 
 Guía para el equipo interno. No hace falta saber programar.
 
@@ -11,7 +11,7 @@ Las cotizaciones (S&P 500, Nasdaq, Dow, ADR y monedas) se actualizan solas de lu
 ## Opción A: desde el panel (recomendada)
 
 1. Entrá a **https://app.pagescms.org** e iniciá sesión con tu cuenta de GitHub.
-2. Elegí el repositorio **puente-bursatil**.
+2. Elegí el repositorio **wallstreetdailynews**.
 3. En el menú de la izquierda vas a ver **Noticias** y **Papers**.
 4. Tocá **Add an entry**, completá el formulario y tocá **Save**.
 
@@ -21,7 +21,7 @@ Campos de una noticia:
 |---|---|
 | Título | El titular. Corto y concreto. |
 | Fecha de publicación | Día y hora. Si ponés una fecha futura, la nota no aparece hasta ese día (en la siguiente actualización del sitio). |
-| Autor | Tu nombre o "Redacción Puente Bursátil". |
+| Autor | Tu nombre o "Redacción WallStreetDailyNews.cl". |
 | Categoría | Wall Street, Nasdaq, Sudamérica, Empresas, Economía o Monedas. |
 | Resumen | Una o dos oraciones. Aparece en la portada, en la lista y al compartir el enlace. |
 | Imagen principal | Opcional. JPG o PNG de menos de 1 MB. |

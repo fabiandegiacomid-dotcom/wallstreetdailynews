@@ -1,4 +1,4 @@
-/* Puente Bursátil
+/* WallStreetDailyNews.cl
    Layout: ticker-board masthead, then a two-column brief, ADR and currency tables, papers and local hours. */
 :root {
   --bg: #f3f5f7;
@@ -44,8 +44,9 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; li
 /* Top bar */
 .topbar { background: var(--board); color: var(--board-ink); padding-top: env(safe-area-inset-top, 0px); }
 .topbar-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-block: .9rem; }
-.brand { font-family: var(--font-display); font-weight: 800; font-stretch: 125%; font-size: 1.45rem; letter-spacing: -.01em; color: var(--board-ink); text-decoration: none; }
+.brand { font-family: var(--font-display); font-weight: 800; font-stretch: 100%; font-size: clamp(1.15rem, 4.2vw, 1.45rem); letter-spacing: -.01em; color: var(--board-ink); text-decoration: none; }
 .brand span { color: var(--board-accent); }
+.brand small { font-size: .7em; font-weight: 600; color: var(--board-muted); }
 .topbar nav { display: flex; gap: 1.25rem; }
 .topbar nav a { color: var(--board-muted); text-decoration: none; font-weight: 500; padding-block: .25rem; border-bottom: 2px solid transparent; }
 .topbar nav a:hover, .topbar nav a[aria-current="page"] { color: var(--board-ink); border-bottom-color: var(--board-accent); }
@@ -155,7 +156,7 @@ select { font: inherit; padding: .45rem .6rem; background: var(--surface); color
 .links-page .site-footer { border-top-color: var(--board-line); color: var(--board-muted); }
 .links-page .site-footer a { color: var(--board-accent); }
 .links { max-width: 30rem; margin: 0 auto; padding: calc(env(safe-area-inset-top, 0px) + 2.5rem) max(16px, env(safe-area-inset-right, 0px)) 2rem max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 1.25rem; }
-.links .brand { font-size: 1.9rem; text-align: center; }
+.links .brand { font-size: clamp(1.4rem, 6.5vw, 1.9rem); text-align: center; }
 .links .tagline { margin: 0; text-align: center; color: var(--board-muted); }
 .links .mini { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--board-line); border: 1px solid var(--board-line); }
 .links .mini div { background: var(--board); padding: .6rem .5rem; text-align: center; display: grid; gap: .1rem; }

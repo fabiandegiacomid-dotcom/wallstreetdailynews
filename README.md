@@ -1,4 +1,4 @@
-# Puente Bursátil
+# WallStreetDailyNews.cl
 
 Sitio de reportes de Wall Street y el Nasdaq para Sudamérica.
 
@@ -16,9 +16,9 @@ Sitio de reportes de Wall Street y el Nasdaq para Sudamérica.
 
 ## Puesta en marcha
 
-1. Creá un repositorio público llamado `puente-bursatil` en GitHub y subí estos archivos.
-2. En `_config.yml`, reemplazá `USUARIO` por tu usuario de GitHub y `TU_CUENTA` por tu cuenta de Instagram.
+1. Creá un repositorio público llamado `wallstreetdailynews` en GitHub y subí estos archivos.
+2. En `_config.yml` están el usuario de GitHub (`url`), la ruta (`baseurl`) y la cuenta de Instagram.
 3. **Settings → Pages → Source: GitHub Actions**.
 4. **Actions → Actualizar datos y publicar el sitio → Run workflow**.
 
-El sitio queda en `https://USUARIO.github.io/puente-bursatil/` y el enlace para Instagram en `https://USUARIO.github.io/puente-bursatil/links/`.
+El sitio queda en `https://fabiandegiacomid-dotcom.github.io/wallstreetdailynews/` y el enlace para Instagram en `https://fabiandegiacomid-dotcom.github.io/wallstreetdailynews/links/`.

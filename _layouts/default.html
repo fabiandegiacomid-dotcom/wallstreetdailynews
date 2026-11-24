@@ -16,7 +16,7 @@
   {% unless page.sin_menu %}
   <header class="topbar">
     <div class="wrap topbar-in">
-      <a class="brand" href="{{ '/' | relative_url }}">Puente<span>Bursátil</span></a>
+      <a class="brand" href="{{ '/' | relative_url }}">WallStreet<span>DailyNews</span><small>.cl</small></a>
       <nav aria-label="Secciones">
         <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Reporte</a>
         <a href="{{ '/noticias/' | relative_url }}"{% if page.url contains '/noticias/' %} aria-current="page"{% endif %}>Noticias</a>
@@ -30,7 +30,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p><strong>Puente Bursátil</strong> resume información pública con fines informativos. No es una recomendación de inversión.</p>
+      <p><strong>WallStreetDailyNews.cl</strong> resume información pública con fines informativos. No es una recomendación de inversión.</p>
       <p>Cotizaciones: {{ site.data.mercado.fuente }}, actualizadas de lunes a viernes después del cierre de Nueva York. · <a href="{{ site.instagram }}">Instagram</a> · <a href="{{ '/noticias/feed.xml' | relative_url }}">RSS</a></p>
     </div>
   </footer>

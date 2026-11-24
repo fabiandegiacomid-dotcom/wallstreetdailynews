@@ -1,12 +1,12 @@
 # ─── Datos del sitio ─────────────────────────────────────────────
-title: Puente Bursátil
+title: WallStreetDailyNews.cl
 description: Lo más relevante de Wall Street y el Nasdaq, explicado para Sudamérica.
 lang: es
 
 # Cambiá USUARIO por tu nombre de usuario de GitHub.
-# Si el repositorio no se llama "puente-bursatil", cambiá también baseurl.
+# Si el repositorio no se llama "wallstreetdailynews", cambiá también baseurl.
 url: "https://fabiandegiacomid-dotcom.github.io"
-baseurl: "/puente-bursatil"
+baseurl: "/wallstreetdailynews"
 
 # Tu cuenta de Instagram (aparece en la página de enlaces y en el pie).
 instagram: "https://www.instagram.com/wallstreetdailynews.cl/"

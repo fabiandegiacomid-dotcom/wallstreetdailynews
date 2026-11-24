@@ -1,7 +1,7 @@
 ---
 title: "El Dow supera los 50.000 puntos mientras los chips arrastran al Nasdaq"
 date: 2026-11-24 19:00:00 -0300
-autor: Redacción Puente Bursátil
+autor: Redacción WallStreetDailyNews.cl
 categoria: Wall Street
 resumen: "Wall Street vivió una sesión de rotación: el dinero salió de los semiconductores y fue a parar a acciones industriales y defensivas. Para Sudamérica, el dato a vigilar es la inflación PCE y la Fed de diciembre."
 ---

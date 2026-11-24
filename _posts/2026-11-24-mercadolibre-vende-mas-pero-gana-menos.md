@@ -1,7 +1,7 @@
 ---
 title: "MercadoLibre vende más que nunca, pero gana menos por cada dólar"
 date: 2026-11-24 12:00:00 -0300
-autor: Redacción Puente Bursátil
+autor: Redacción WallStreetDailyNews.cl
 categoria: Empresas
 resumen: "Ingresos de US$ 10.750 millones en el tercer trimestre, 45% más que un año antes. El margen operativo bajó a 6,3% y la ganancia por acción quedó debajo de lo esperado."
 ---
