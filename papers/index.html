@@ -1,0 +1,24 @@
+---
+layout: default
+title: Papers
+---
+{%- assign papers = site.papers | sort: "date" | reverse -%}
+<main class="wrap">
+  <header class="page-head">
+    <div class="eyebrow">Análisis e informes</div>
+    <h1>Papers</h1>
+    <p>Informes de análisis del equipo sobre empresas, sectores y la economía de la región.</p>
+  </header>
+  <div class="papers" style="padding-bottom:2rem">
+    {%- for p in papers %}
+    <article class="paper">
+      <span class="eyebrow">{% include fecha.html fecha=p.date %}{% if p.categoria %} · {{ p.categoria }}{% endif %}{% if p.pdf %} · PDF{% endif %}</span>
+      <a class="t" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+      {% if p.resumen %}<p>{{ p.resumen }}</p>{% endif %}
+      {% if p.autor %}<p>{{ p.autor }}</p>{% endif %}
+    </article>
+    {%- else %}
+    <p class="empty">Todavía no hay papers publicados.</p>
+    {%- endfor %}
+  </div>
+</main>

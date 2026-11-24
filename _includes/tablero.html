@@ -1,0 +1,23 @@
+{%- assign m = site.data.mercado -%}
+<div class="board">
+  <div class="wrap">
+    <div class="eyebrow">{{ m.estado }} · {{ m.fecha_texto }} · Nueva York</div>
+    <div class="indices" aria-label="Índices de Wall Street">
+      {%- for i in m.indices %}
+      <div class="idx">
+        <div class="name">{{ i.nombre }}</div>
+        <div class="val">{{ i.valor_txt }}</div>
+        <div class="chg {{ i.dir }}">{% if i.dir == 'up' %}▲{% elsif i.dir == 'down' %}▼{% else %}■{% endif %} {{ i.cambio_txt }}</div>
+        {%- if i.sparkline %}
+        <svg class="spark-{{ i.dir }}" viewBox="0 0 120 32" preserveAspectRatio="none" role="img" aria-label="{{ i.nombre }}, último mes: mínimo {{ i.sparkline.min_txt }}, máximo {{ i.sparkline.max_txt }}">
+          <polygon class="spark-area" points="{{ i.sparkline.area }}"/>
+          <polyline class="spark-line" points="{{ i.sparkline.linea }}" vector-effect="non-scaling-stroke"/>
+          <circle class="spark-dot" cx="{{ i.sparkline.x }}" cy="{{ i.sparkline.y }}" r="2.5"/>
+        </svg>
+        <div class="range">Último mes: {{ i.sparkline.min_txt }} – {{ i.sparkline.max_txt }}</div>
+        {%- endif %}
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,208 @@
+{
+  "indices": [
+    {
+      "simbolo": "^GSPC",
+      "nombre": "S&P 500",
+      "fecha": "2026-11-24",
+      "valor": 7201.0898,
+      "valor_txt": "7.201,09",
+      "cambio_pct": -0.4985,
+      "cambio_txt": "−0,50%",
+      "dir": "down",
+      "cerrado": true,
+      "sparkline": {
+        "linea": "0.0,4.3 5.7,2.7 11.4,2.0 17.1,2.8 22.9,7.5 28.6,8.8 34.3,7.9 40.0,3.9 45.7,15.1 51.4,14.3 57.1,8.5 62.9,9.5 68.6,6.2 74.3,7.1 80.0,8.1 85.7,13.0 91.4,15.6 97.1,16.1 102.9,21.1 108.6,30.0 114.3,19.0 120.0,20.2",
+        "area": "0,32 0.0,4.3 5.7,2.7 11.4,2.0 17.1,2.8 22.9,7.5 28.6,8.8 34.3,7.9 40.0,3.9 45.7,15.1 51.4,14.3 57.1,8.5 62.9,9.5 68.6,6.2 74.3,7.1 80.0,8.1 85.7,13.0 91.4,15.6 97.1,16.1 102.9,21.1 108.6,30.0 114.3,19.0 120.0,20.2 120,32",
+        "x": "120.0",
+        "y": "20.2",
+        "min_txt": "6.910,39",
+        "max_txt": "7.743,98"
+      },
+      "desde": "2026-10-26"
+    },
+    {
+      "simbolo": "^IXIC",
+      "nombre": "Nasdaq Composite",
+      "fecha": "2026-11-24",
+      "valor": 23733.5352,
+      "valor_txt": "23.733,54",
+      "cambio_pct": -1.4779,
+      "cambio_txt": "−1,48%",
+      "dir": "down",
+      "cerrado": true,
+      "sparkline": {
+        "linea": "0.0,4.7 5.7,2.5 11.4,2.0 17.1,4.6 22.9,9.9 28.6,11.9 34.3,10.4 40.0,7.8 45.7,17.9 51.4,16.0 57.1,11.2 62.9,12.6 68.6,9.7 74.3,10.4 80.0,12.1 85.7,16.5 91.4,17.8 97.1,17.1 102.9,21.0 108.6,30.0 114.3,19.5 120.0,22.1",
+        "area": "0,32 0.0,4.7 5.7,2.5 11.4,2.0 17.1,4.6 22.9,9.9 28.6,11.9 34.3,10.4 40.0,7.8 45.7,17.9 51.4,16.0 57.1,11.2 62.9,12.6 68.6,9.7 74.3,10.4 80.0,12.1 85.7,16.5 91.4,17.8 97.1,17.1 102.9,21.0 108.6,30.0 114.3,19.5 120.0,22.1 120,32",
+        "x": "120.0",
+        "y": "22.1",
+        "min_txt": "22.617,73",
+        "max_txt": "26.549,85"
+      },
+      "desde": "2026-10-26"
+    },
+    {
+      "simbolo": "^DJI",
+      "nombre": "Dow Jones",
+      "fecha": "2026-11-24",
+      "valor": 50018.6992,
+      "valor_txt": "50.018,70",
+      "cambio_pct": 0.8537,
+      "cambio_txt": "+0,85%",
+      "dir": "up",
+      "cerrado": true,
+      "sparkline": {
+        "linea": "0.0,7.3 5.7,7.3 11.4,6.7 17.1,7.4 22.9,10.5 28.6,9.4 34.3,10.4 40.0,2.0 45.7,11.9 51.4,13.1 57.1,7.2 62.9,8.0 68.6,6.7 74.3,7.7 80.0,7.4 85.7,11.4 91.4,16.0 97.1,19.0 102.9,24.9 108.6,30.0 114.3,22.2 120.0,19.9",
+        "area": "0,32 0.0,7.3 5.7,7.3 11.4,6.7 17.1,7.4 22.9,10.5 28.6,9.4 34.3,10.4 40.0,2.0 45.7,11.9 51.4,13.1 57.1,7.2 62.9,8.0 68.6,6.7 74.3,7.7 80.0,7.4 85.7,11.4 91.4,16.0 97.1,19.0 102.9,24.9 108.6,30.0 114.3,22.2 120.0,19.9 120,32",
+        "x": "120.0",
+        "y": "19.9",
+        "min_txt": "48.147,33",
+        "max_txt": "53.356,12"
+      },
+      "desde": "2026-10-26"
+    }
+  ],
+  "adrs": [
+    {
+      "simbolo": "MELI",
+      "nombre": "MercadoLibre",
+      "fecha": "2026-11-24",
+      "valor": 1450.3101,
+      "valor_txt": "1.450,31",
+      "cambio_pct": 1.7704,
+      "cambio_txt": "+1,77%",
+      "dir": "up",
+      "cerrado": true,
+      "detalle": "Argentina · Uruguay"
+    },
+    {
+      "simbolo": "NU",
+      "nombre": "Nu Holdings",
+      "fecha": "2026-11-24",
+      "valor": 11.86,
+      "valor_txt": "11,86",
+      "cambio_pct": 0.5085,
+      "cambio_txt": "+0,51%",
+      "dir": "up",
+      "cerrado": true,
+      "detalle": "Brasil"
+    },
+    {
+      "simbolo": "PBR",
+      "nombre": "Petrobras",
+      "fecha": "2026-11-24",
+      "valor": 15.67,
+      "valor_txt": "15,67",
+      "cambio_pct": -0.8855,
+      "cambio_txt": "−0,89%",
+      "dir": "down",
+      "cerrado": true,
+      "detalle": "Brasil"
+    },
+    {
+      "simbolo": "VALE",
+      "nombre": "Vale",
+      "fecha": "2026-11-24",
+      "valor": 9.37,
+      "valor_txt": "9,37",
+      "cambio_pct": -4.3878,
+      "cambio_txt": "−4,39%",
+      "dir": "down",
+      "cerrado": true,
+      "detalle": "Brasil"
+    },
+    {
+      "simbolo": "ITUB",
+      "nombre": "Itaú Unibanco",
+      "fecha": "2026-11-24",
+      "valor": 6.72,
+      "valor_txt": "6,72",
+      "cambio_pct": 0.4484,
+      "cambio_txt": "+0,45%",
+      "dir": "up",
+      "cerrado": true,
+      "detalle": "Brasil"
+    },
+    {
+      "simbolo": "YPF",
+      "nombre": "YPF",
+      "fecha": "2026-11-24",
+      "valor": 31.71,
+      "valor_txt": "31,71",
+      "cambio_pct": -4.4304,
+      "cambio_txt": "−4,43%",
+      "dir": "down",
+      "cerrado": true,
+      "detalle": "Argentina"
+    }
+  ],
+  "monedas": [
+    {
+      "simbolo": "BRL=X",
+      "nombre": "Real brasileño",
+      "fecha": "2026-11-24",
+      "valor": 5.8933,
+      "valor_txt": "5,89",
+      "cambio_pct": -0.9196,
+      "cambio_txt": "−0,92%",
+      "dir": "down",
+      "cerrado": false,
+      "detalle": "USD/BRL"
+    },
+    {
+      "simbolo": "ARS=X",
+      "nombre": "Peso argentino (oficial)",
+      "fecha": "2026-11-24",
+      "valor": 1592.0,
+      "valor_txt": "1.592,00",
+      "cambio_pct": 1.4785,
+      "cambio_txt": "+1,48%",
+      "dir": "up",
+      "cerrado": false,
+      "detalle": "USD/ARS"
+    },
+    {
+      "simbolo": "CLP=X",
+      "nombre": "Peso chileno",
+      "fecha": "2026-11-24",
+      "valor": 1032.8101,
+      "valor_txt": "1.032,81",
+      "cambio_pct": 4.3006,
+      "cambio_txt": "+4,30%",
+      "dir": "up",
+      "cerrado": false,
+      "atipico": true,
+      "detalle": "USD/CLP"
+    },
+    {
+      "simbolo": "COP=X",
+      "nombre": "Peso colombiano",
+      "fecha": "2026-11-24",
+      "valor": 3602.49,
+      "valor_txt": "3.602,49",
+      "cambio_pct": 8.8522,
+      "cambio_txt": "+8,85%",
+      "dir": "up",
+      "cerrado": false,
+      "atipico": true,
+      "detalle": "USD/COP"
+    },
+    {
+      "simbolo": "PEN=X",
+      "nombre": "Sol peruano",
+      "fecha": "2026-11-24",
+      "valor": 3.4805,
+      "valor_txt": "3,48",
+      "cambio_pct": 4.8371,
+      "cambio_txt": "+4,84%",
+      "dir": "up",
+      "cerrado": false,
+      "atipico": true,
+      "detalle": "USD/PEN"
+    }
+  ],
+  "fecha_sesion": "2026-11-24",
+  "fecha_texto": "martes 24 de noviembre de 2026",
+  "estado": "Cierre",
+  "actualizado": "2026-11-24T22:48:45Z",
+  "fuente": "Yahoo Finance"
+}

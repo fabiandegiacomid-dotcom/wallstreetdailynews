@@ -1,0 +1,21 @@
+---
+layout: default
+title: Noticias
+---
+<main class="wrap">
+  <header class="page-head">
+    <div class="eyebrow">Wall Street · Nasdaq · Sudamérica</div>
+    <h1>Noticias</h1>
+  </header>
+  <ul class="news" style="padding-bottom:2rem">
+    {%- for p in site.posts %}
+    <li>
+      <span class="meta">{% include fecha.html fecha=p.date %}{% if p.categoria %} · {{ p.categoria }}{% endif %}{% if p.autor %} · {{ p.autor }}{% endif %}</span>
+      <a class="t" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+      {% if p.resumen %}<p>{{ p.resumen }}</p>{% endif %}
+    </li>
+    {%- else %}
+    <li class="empty">Todavía no hay noticias publicadas.</li>
+    {%- endfor %}
+  </ul>
+</main>

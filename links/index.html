@@ -1,0 +1,27 @@
+---
+layout: default
+title: Enlaces
+description: Reporte diario de Wall Street y el Nasdaq para Sudamérica. Noticias, papers y cotizaciones.
+sin_menu: true
+body_class: links-page
+---
+{%- assign m = site.data.mercado -%}
+{%- assign ultima = site.posts.first -%}
+{%- assign papers = site.papers | sort: "date" | reverse -%}
+<main class="links">
+  <a class="brand" href="{{ '/' | relative_url }}">Puente<span>Bursátil</span></a>
+  <p class="tagline">Wall Street y el Nasdaq, explicados para Sudamérica.</p>
+
+  <div class="mini" aria-label="Índices">
+    {%- for i in m.indices %}
+    <div><span class="n">{{ i.nombre | replace: " Composite", "" }}</span><span class="v">{{ i.valor_txt }}</span><span class="v {{ i.dir }}">{{ i.cambio_txt }}</span></div>
+    {%- endfor %}
+  </div>
+  <p class="when">{{ m.estado }} · {{ m.fecha_texto }}</p>
+
+  <a class="link-btn primary" href="{{ '/' | relative_url }}"><strong>Reporte de hoy</strong><span>Índices, ADR sudamericanos y el dólar en la región</span></a>
+  {% if ultima %}<a class="link-btn" href="{{ ultima.url | relative_url }}"><strong>{{ ultima.title }}</strong><span>Última noticia</span></a>{% endif %}
+  {% if papers.first %}<a class="link-btn" href="{{ papers.first.url | relative_url }}"><strong>{{ papers.first.title }}</strong><span>Último paper</span></a>{% endif %}
+  <a class="link-btn" href="{{ '/noticias/' | relative_url }}"><strong>Todas las noticias</strong><span>Archivo completo</span></a>
+  <a class="link-btn" href="{{ '/papers/' | relative_url }}"><strong>Todos los papers</strong><span>Análisis e informes del equipo</span></a>
+</main>

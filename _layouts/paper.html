@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<main class="wrap article">
+  <a class="back" href="{{ '/papers/' | relative_url }}">← Todos los papers</a>
+  <header class="article-head">
+    <div class="eyebrow">Paper{% if page.categoria %} · {{ page.categoria }}{% endif %}</div>
+    <h1>{{ page.title }}</h1>
+    {% if page.resumen %}<p class="dek">{{ page.resumen }}</p>{% endif %}
+    <p class="byline">{% if page.autor %}{{ page.autor }} · {% endif %}{% include fecha.html fecha=page.date %}</p>
+    {% if page.pdf %}<p><a class="btn" href="{{ page.pdf | relative_url }}">Descargar PDF</a></p>{% endif %}
+  </header>
+  <div class="prose">
+    {%- capture src_archivos %}src="{{ '/archivos/' | relative_url }}{% endcapture -%}
+    {%- capture href_archivos %}href="{{ '/archivos/' | relative_url }}{% endcapture -%}
+    {{ content | replace: 'src="/archivos/', src_archivos | replace: 'href="/archivos/', href_archivos }}
+  </div>
+</main>

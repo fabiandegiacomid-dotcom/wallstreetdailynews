@@ -1,0 +1,68 @@
+name: Actualizar datos y publicar el sitio
+
+on:
+  # Cada vez que alguien publica una noticia o un paper.
+  push:
+    branches: [main]
+  # De lunes a viernes a las 21:45 UTC (después del cierre de Nueva York todo el año).
+  schedule:
+    - cron: "45 21 * * 1-5"
+  # Botón "Run workflow" en la pestaña Actions, para actualizar a mano.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Descargar cierres del día
+        if: github.event_name != 'push'
+        run: python scripts/actualizar_mercado.py
+
+      - name: Guardar los datos en el repositorio
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/mercado.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos"
+          else
+            git commit -m "Datos de mercado $(date -u +%F)"
+            git pull --rebase
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - name: Construir el sitio con Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - uses: actions/upload-pages-artifact@v3
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

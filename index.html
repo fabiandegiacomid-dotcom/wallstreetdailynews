@@ -1,0 +1,163 @@
+---
+layout: default
+title: Reporte del día
+---
+{%- assign m = site.data.mercado -%}
+{%- assign principal = site.posts.first -%}
+{% include tablero.html %}
+
+<main>
+  {% if principal %}
+  <div class="wrap lead">
+    <div class="eyebrow">La nota del día{% if principal.categoria %} · {{ principal.categoria }}{% endif %}</div>
+    <h1><a href="{{ principal.url | relative_url }}">{{ principal.title }}</a></h1>
+    {% if principal.resumen %}<p>{{ principal.resumen }}</p>{% endif %}
+    <div class="byline">{% if principal.autor %}{{ principal.autor }} · {% endif %}{% include fecha.html fecha=principal.date %}</div>
+  </div>
+  {% endif %}
+
+  <section class="block">
+    <div class="wrap cols">
+      <div class="col">
+        <div class="sec-head"><h2>Últimas noticias</h2><a class="more" href="{{ '/noticias/' | relative_url }}">Ver todas →</a></div>
+        <ul class="news">
+          {%- for p in site.posts offset: 1 limit: 4 %}
+          <li>
+            <span class="meta">{% include fecha.html fecha=p.date %}{% if p.categoria %} · {{ p.categoria }}{% endif %}</span>
+            <a class="t" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+            {% if p.resumen %}<p>{{ p.resumen }}</p>{% endif %}
+          </li>
+          {%- else %}
+          <li class="empty">Las próximas noticias aparecerán acá.</li>
+          {%- endfor %}
+        </ul>
+      </div>
+      <div class="col">
+        <div class="sec-head"><h2>ADR sudamericanos</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Empresa</th><th class="r">US$</th><th class="r">Día</th></tr></thead>
+            <tbody>
+              {%- for a in m.adrs %}
+              <tr>
+                <td>{{ a.nombre }}<span class="sub">{{ a.simbolo }} · {{ a.detalle }}</span></td>
+                <td class="num r">{{ a.valor_txt }}</td>
+                <td class="num r {{ a.dir }}">{{ a.cambio_txt }}</td>
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Precios en Nueva York, {{ m.estado | downcase }} del {{ m.fecha_texto }}.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap cols">
+      <div class="col">
+        <div class="sec-head"><h2>El dólar en la región</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Moneda</th><th class="r">Por US$ 1</th><th class="r">Día</th></tr></thead>
+            <tbody>
+              {%- for c in m.monedas %}
+              <tr>
+                <td>{{ c.nombre }}<span class="sub">{{ c.detalle }}</span></td>
+                <td class="num r">{{ c.valor_txt }}</td>
+                {%- if c.atipico %}
+                <td class="r"><span class="flag" title="La variación diaria supera el 3%. Puede ser un error de la fuente.">dato atípico</span></td>
+                {%- else %}
+                <td class="num r {% if c.dir == 'up' %}down{% elsif c.dir == 'down' %}up{% else %}flat{% endif %}">{{ c.cambio_txt }}</td>
+                {%- endif %}
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">En rojo, días en que la moneda local se debilita frente al dólar. Las variaciones mayores a 3% en un día se marcan como dato atípico hasta confirmarlas.</p>
+      </div>
+      <div class="col">
+        <div class="sec-head"><h2>Papers</h2><a class="more" href="{{ '/papers/' | relative_url }}">Ver todos →</a></div>
+        {%- assign papers = site.papers | sort: "date" | reverse -%}
+        <ul class="news">
+          {%- for p in papers limit: 3 %}
+          <li>
+            <span class="meta">{% include fecha.html fecha=p.date %}{% if p.categoria %} · {{ p.categoria }}{% endif %}{% if p.pdf %} · PDF{% endif %}</span>
+            <a class="t" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+            {% if p.resumen %}<p>{{ p.resumen }}</p>{% endif %}
+          </li>
+          {%- else %}
+          <li class="empty">Todavía no hay papers publicados.</li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><h2>¿A qué hora opera Nueva York donde vivís?</h2></div>
+      <div class="hours-ctl">
+        <label for="country">País</label>
+        <select id="country"></select>
+      </div>
+      <div class="hours-out" aria-live="polite">
+        <div class="hbox"><span class="eyebrow">Apertura</span><span class="num" id="h-open">11:30</span></div>
+        <div class="hbox"><span class="eyebrow">Cierre</span><span class="num" id="h-close">18:00</span></div>
+        <div class="hbox"><span class="eyebrow">Diferencia con Nueva York</span><span class="num" id="h-diff">+2 h</span></div>
+      </div>
+      <p class="table-note">Se calcula con la fecha de hoy, así que tiene en cuenta los cambios de horario de verano.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><h2>Tres formas de llegar a Wall Street</h2></div>
+      <dl class="gloss">
+        <div><dt>ADR</dt><dd>Certificado que permite que una empresa extranjera cotice en EE. UU. MercadoLibre, Nubank y Petrobras operan así en Nueva York.</dd></div>
+        <div><dt>CEDEAR · Argentina</dt><dd>Certificado que replica una acción de EE. UU. y se compra en pesos en BYMA. Su precio sigue a la acción y al dólar implícito.</dd></div>
+        <div><dt>BDR · Brasil</dt><dd>El equivalente brasileño, negociado en reales en la B3. Nubank, por ejemplo, cotiza localmente como ROXO34.</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var paises = [
+    ["Argentina", "America/Argentina/Buenos_Aires"],
+    ["Brasil (Brasilia)", "America/Sao_Paulo"],
+    ["Chile (continental)", "America/Santiago"],
+    ["Uruguay", "America/Montevideo"],
+    ["Paraguay", "America/Asuncion"],
+    ["Bolivia", "America/La_Paz"],
+    ["Venezuela", "America/Caracas"],
+    ["Perú", "America/Lima"],
+    ["Colombia", "America/Bogota"],
+    ["Ecuador (continental)", "America/Guayaquil"]
+  ];
+  // Minutos de diferencia entre una zona y UTC en un instante dado.
+  function offset(tz, d) {
+    var p = new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(d);
+    var g = {}; p.forEach(function (x) { g[x.type] = +x.value; });
+    return (Date.UTC(g.year, g.month - 1, g.day, g.hour, g.minute) - d.getTime()) / 60000;
+  }
+  function hhmm(min) { min = ((min % 1440) + 1440) % 1440; return String(Math.floor(min / 60)).padStart(2, "0") + ":" + String(min % 60).padStart(2, "0"); }
+  var sel = document.getElementById("country");
+  if (!sel) return;
+  paises.forEach(function (p, i) { var o = document.createElement("option"); o.value = i; o.textContent = p[0]; sel.appendChild(o); });
+  function show() {
+    var now = new Date();
+    var diff = offset(paises[+sel.value][1], now) - offset("America/New_York", now);
+    document.getElementById("h-open").textContent = hhmm(9 * 60 + 30 + diff);
+    document.getElementById("h-close").textContent = hhmm(16 * 60 + diff);
+    var h = diff / 60;
+    document.getElementById("h-diff").textContent = (h > 0 ? "+" : h < 0 ? "−" : "") + Math.abs(h) + " h";
+    try { localStorage.setItem("pb-pais", sel.value); } catch (e) {}
+  }
+  try { var s = localStorage.getItem("pb-pais"); if (s !== null && paises[+s]) sel.value = s; } catch (e) {}
+  sel.addEventListener("change", show);
+  show();
+})();
+</script>

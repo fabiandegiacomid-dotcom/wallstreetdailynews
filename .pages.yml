@@ -1,0 +1,79 @@
+# Configuración del panel de publicación (Pages CMS: https://pagescms.org)
+# Permite que el equipo publique noticias y papers desde un formulario, sin tocar código.
+media:
+  input: archivos
+  output: /archivos
+
+content:
+  - name: noticias
+    label: Noticias
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, categoria]
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+      - name: date
+        label: Fecha de publicación
+        type: date
+        required: true
+        options:
+          time: true
+      - name: autor
+        label: Autor
+        type: string
+      - name: categoria
+        label: Categoría
+        type: select
+        options:
+          values: [Wall Street, Nasdaq, Sudamérica, Empresas, Economía, Monedas]
+      - name: resumen
+        label: Resumen (una o dos oraciones)
+        type: text
+      - name: imagen
+        label: Imagen principal (opcional)
+        type: image
+      - name: imagen_alt
+        label: Descripción de la imagen
+        type: string
+      - name: body
+        label: Contenido
+        type: rich-text
+
+  - name: papers
+    label: Papers
+    type: collection
+    path: _papers
+    filename: "{year}-{month}-{primary}.md"
+    view:
+      fields: [title, date, categoria]
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+      - name: date
+        label: Fecha
+        type: date
+        required: true
+      - name: autor
+        label: Autor o equipo
+        type: string
+      - name: categoria
+        label: Categoría
+        type: select
+        options:
+          values: [Empresas, Sectores, Economía, Monedas, Estrategia]
+      - name: resumen
+        label: Resumen
+        type: text
+      - name: pdf
+        label: Archivo PDF (opcional)
+        type: file
+      - name: body
+        label: Contenido
+        type: rich-text
