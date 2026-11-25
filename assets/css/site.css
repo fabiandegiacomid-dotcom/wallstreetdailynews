@@ -190,3 +190,8 @@ tr.ref td { background: var(--accent-soft); font-weight: 600; }
 .cols .hours-out { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 760px) { .grupos { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .cols .hours-out { grid-template-columns: 1fr; } }
+
+/* Tablas dentro de artículos: el texto se parte en líneas */
+.prose th, .prose td { white-space: normal; min-width: 7.5rem; vertical-align: top; }
+.prose td:first-child { font-weight: 600; }
+.cols .hbox .num { font-size: 1.15rem; }

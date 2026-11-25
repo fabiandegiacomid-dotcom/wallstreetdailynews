@@ -30,7 +30,7 @@ content:
         label: Categoría
         type: select
         options:
-          values: [Wall Street, Nasdaq, Sudamérica, Empresas, Economía, Monedas]
+          values: [Wall Street, Nasdaq, Sudamérica, Empresas, Inteligencia Artificial, Economía, Monedas]
       - name: resumen
         label: Resumen (una o dos oraciones)
         type: text

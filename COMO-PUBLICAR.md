@@ -22,7 +22,7 @@ Campos de una noticia:
 | Título | El titular. Corto y concreto. |
 | Fecha de publicación | Día y hora. Si ponés una fecha futura, la nota no aparece hasta ese día (en la siguiente actualización del sitio). |
 | Autor | Tu nombre o "Redacción WallStreetDailyNews.cl". |
-| Categoría | Wall Street, Nasdaq, Sudamérica, Empresas, Economía o Monedas. |
+| Categoría | Wall Street, Nasdaq, Sudamérica, Empresas, Inteligencia Artificial, Economía o Monedas. |
 | Resumen | Una o dos oraciones. Aparece en la portada, en la lista y al compartir el enlace. |
 | Imagen principal | Opcional. JPG o PNG de menos de 1 MB. |
 | Contenido | El texto completo. Podés usar títulos, negritas, listas, citas y tablas. |
