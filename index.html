@@ -33,22 +33,54 @@ title: Reporte del día
         </ul>
       </div>
       <div class="col">
-        <div class="sec-head"><h2>ADR sudamericanos</h2></div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Empresa</th><th class="r">US$</th><th class="r">Día</th></tr></thead>
-            <tbody>
-              {%- for a in m.adrs %}
-              <tr>
-                <td>{{ a.nombre }}<span class="sub">{{ a.simbolo }} · {{ a.detalle }}</span></td>
-                <td class="num r">{{ a.valor_txt }}</td>
-                <td class="num r {{ a.dir }}">{{ a.cambio_txt }}</td>
-              </tr>
-              {%- endfor %}
-            </tbody>
-          </table>
+        <div class="sec-head"><h2>Papers</h2><a class="more" href="{{ '/papers/' | relative_url }}">Ver todos →</a></div>
+        {%- assign papers = site.papers | sort: "date" | reverse -%}
+        <ul class="news">
+          {%- for p in papers limit: 3 %}
+          <li>
+            <span class="meta">{% include fecha.html fecha=p.date %}{% if p.categoria %} · {{ p.categoria }}{% endif %}{% if p.pdf %} · PDF{% endif %}</span>
+            <a class="t" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+            {% if p.resumen %}<p>{{ p.resumen }}</p>{% endif %}
+          </li>
+          {%- else %}
+          <li class="empty">Todavía no hay papers publicados.</li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><h2>Acciones del día</h2><span class="eyebrow">{{ m.estado }} · {{ m.fecha_texto }}</span></div>
+      <div class="grupos">
+        {%- for g in m.grupos %}
+        <div class="grupo" id="{{ g.id }}">
+          <h3>{{ g.titulo }}</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Empresa</th><th class="r">Precio</th><th class="r">Día</th></tr></thead>
+              <tbody>
+                {%- if g.referencia %}
+                <tr class="ref">
+                  <td>{{ g.referencia.nombre }}<span class="sub">{{ g.referencia.simbolo }} · referencia</span></td>
+                  <td class="num r">{{ g.referencia.valor_txt }}</td>
+                  <td class="num r {{ g.referencia.dir }}">{{ g.referencia.cambio_txt }}</td>
+                </tr>
+                {%- endif %}
+                {%- for a in g.acciones %}
+                <tr>
+                  <td>{{ a.nombre }}<span class="sub">{{ a.simbolo }}</span></td>
+                  <td class="num r">{{ a.valor_txt }}</td>
+                  <td class="num r {{ a.dir }}">{{ a.cambio_txt }}</td>
+                </tr>
+                {%- endfor %}
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">{{ g.nota }}</p>
         </div>
-        <p class="table-note">Precios en Nueva York, {{ m.estado | downcase }} del {{ m.fecha_texto }}.</p>
+        {%- endfor %}
       </div>
     </div>
   </section>
@@ -78,36 +110,18 @@ title: Reporte del día
         <p class="table-note">En rojo, días en que la moneda local se debilita frente al dólar. Las variaciones mayores a 3% en un día se marcan como dato atípico hasta confirmarlas.</p>
       </div>
       <div class="col">
-        <div class="sec-head"><h2>Papers</h2><a class="more" href="{{ '/papers/' | relative_url }}">Ver todos →</a></div>
-        {%- assign papers = site.papers | sort: "date" | reverse -%}
-        <ul class="news">
-          {%- for p in papers limit: 3 %}
-          <li>
-            <span class="meta">{% include fecha.html fecha=p.date %}{% if p.categoria %} · {{ p.categoria }}{% endif %}{% if p.pdf %} · PDF{% endif %}</span>
-            <a class="t" href="{{ p.url | relative_url }}">{{ p.title }}</a>
-            {% if p.resumen %}<p>{{ p.resumen }}</p>{% endif %}
-          </li>
-          {%- else %}
-          <li class="empty">Todavía no hay papers publicados.</li>
-          {%- endfor %}
-        </ul>
+        <div class="sec-head"><h2>¿A qué hora opera Nueva York donde vivís?</h2></div>
+        <div class="hours-ctl">
+          <label for="country">País</label>
+          <select id="country"></select>
+        </div>
+        <div class="hours-out" aria-live="polite">
+          <div class="hbox"><span class="eyebrow">Apertura</span><span class="num" id="h-open">11:30</span></div>
+          <div class="hbox"><span class="eyebrow">Cierre</span><span class="num" id="h-close">18:00</span></div>
+          <div class="hbox"><span class="eyebrow">Diferencia</span><span class="num" id="h-diff">+2 horas</span></div>
+        </div>
+        <p class="table-note">Se calcula con la fecha de hoy, así que tiene en cuenta los cambios de horario de verano.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap">
-      <div class="sec-head"><h2>¿A qué hora opera Nueva York donde vivís?</h2></div>
-      <div class="hours-ctl">
-        <label for="country">País</label>
-        <select id="country"></select>
-      </div>
-      <div class="hours-out" aria-live="polite">
-        <div class="hbox"><span class="eyebrow">Apertura</span><span class="num" id="h-open">11:30</span></div>
-        <div class="hbox"><span class="eyebrow">Cierre</span><span class="num" id="h-close">18:00</span></div>
-        <div class="hbox"><span class="eyebrow">Diferencia con Nueva York</span><span class="num" id="h-diff">+2 h</span></div>
-      </div>
-      <p class="table-note">Se calcula con la fecha de hoy, así que tiene en cuenta los cambios de horario de verano.</p>
     </div>
   </section>
 
@@ -126,9 +140,9 @@ title: Reporte del día
 <script>
 (function () {
   var paises = [
+    ["Chile (continental)", "America/Santiago"],
     ["Argentina", "America/Argentina/Buenos_Aires"],
     ["Brasil (Brasilia)", "America/Sao_Paulo"],
-    ["Chile (continental)", "America/Santiago"],
     ["Uruguay", "America/Montevideo"],
     ["Paraguay", "America/Asuncion"],
     ["Bolivia", "America/La_Paz"],
@@ -153,10 +167,10 @@ title: Reporte del día
     document.getElementById("h-open").textContent = hhmm(9 * 60 + 30 + diff);
     document.getElementById("h-close").textContent = hhmm(16 * 60 + diff);
     var h = diff / 60;
-    document.getElementById("h-diff").textContent = (h > 0 ? "+" : h < 0 ? "−" : "") + Math.abs(h) + " h";
-    try { localStorage.setItem("pb-pais", sel.value); } catch (e) {}
+    document.getElementById("h-diff").textContent = h === 0 ? "Misma hora" : (h > 0 ? "+" : "−") + Math.abs(h) + (Math.abs(h) === 1 ? " hora" : " horas");
+    try { localStorage.setItem("wsdn-pais", sel.value); } catch (e) {}
   }
-  try { var s = localStorage.getItem("pb-pais"); if (s !== null && paises[+s]) sel.value = s; } catch (e) {}
+  try { var s = localStorage.getItem("wsdn-pais"); if (s !== null && paises[+s]) sel.value = s; } catch (e) {}
   sel.addEventListener("change", show);
   show();
 })();

@@ -16,23 +16,62 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 SALIDA = RAIZ / "_data" / "mercado.json"
 
+# Índices de Wall Street (con gráfico del último mes).
 INDICES = [
     ("^GSPC", "S&P 500"),
     ("^IXIC", "Nasdaq Composite"),
     ("^DJI", "Dow Jones"),
 ]
-ADRS = [
-    ("MELI", "MercadoLibre", "Argentina · Uruguay"),
-    ("NU", "Nu Holdings", "Brasil"),
-    ("PBR", "Petrobras", "Brasil"),
-    ("VALE", "Vale", "Brasil"),
-    ("ITUB", "Itaú Unibanco", "Brasil"),
-    ("YPF", "YPF", "Argentina"),
+
+# Grupos de acciones. "referencia" es el índice o ETF que resume al grupo.
+GRUPOS = [
+    {
+        "id": "magnificas",
+        "titulo": "Las 7 Magníficas",
+        "nota": "Las siete tecnológicas que más pesan en el S&P 500 y el Nasdaq. Precios en US$.",
+        "referencia": None,
+        "acciones": [
+            ("AAPL", "Apple"), ("MSFT", "Microsoft"), ("GOOGL", "Alphabet (Google)"),
+            ("AMZN", "Amazon"), ("NVDA", "Nvidia"), ("META", "Meta"), ("TSLA", "Tesla"),
+        ],
+    },
+    {
+        "id": "chile",
+        "titulo": "Chile · IPSA",
+        "nota": "Empresas del IPSA que cotizan en Nueva York, en US$. Referencia: ETF iShares MSCI Chile.",
+        "referencia": ("ECH", "iShares MSCI Chile (ETF)", 2),
+        "acciones": [
+            ("SQM", "SQM"), ("BCH", "Banco de Chile"), ("BSAC", "Banco Santander Chile"),
+            ("LTM", "LATAM Airlines"), ("ENIC", "Enel Chile"), ("CCU", "CCU"),
+            ("AKO-B", "Embotelladora Andina"),
+        ],
+    },
+    {
+        "id": "brasil",
+        "titulo": "Brasil · B3",
+        "nota": "Empresas brasileñas que cotizan en Nueva York, en US$. Referencia: Ibovespa, en puntos.",
+        "referencia": ("^BVSP", "Ibovespa", 0),
+        "acciones": [
+            ("PBR", "Petrobras"), ("VALE", "Vale"), ("ITUB", "Itaú Unibanco"),
+            ("NU", "Nu Holdings"), ("BBD", "Bradesco"), ("ABEV", "Ambev"),
+        ],
+    },
+    {
+        "id": "argentina",
+        "titulo": "Argentina",
+        "nota": "ADR argentinos en Nueva York, en US$. Referencia: ETF Global X MSCI Argentina.",
+        "referencia": ("ARGT", "Global X MSCI Argentina (ETF)", 2),
+        "acciones": [
+            ("MELI", "MercadoLibre"), ("YPF", "YPF"), ("GGAL", "Grupo Galicia"),
+            ("BMA", "Banco Macro"), ("PAM", "Pampa Energía"), ("TGS", "TGS"),
+        ],
+    },
 ]
+
 MONEDAS = [
+    ("CLP=X", "Peso chileno", "USD/CLP"),
     ("BRL=X", "Real brasileño", "USD/BRL"),
     ("ARS=X", "Peso argentino (oficial)", "USD/ARS"),
-    ("CLP=X", "Peso chileno", "USD/CLP"),
     ("COP=X", "Peso colombiano", "USD/COP"),
     ("PEN=X", "Sol peruano", "USD/PEN"),
 ]
@@ -49,15 +88,21 @@ def numero_es(x, dec=2):
 
 
 def pct_es(x):
-    signo = "+" if x > 0 else ("−" if x < 0 else "")
+    signo = "+" if x > 0.004 else ("−" if x < -0.004 else "")
     return f"{signo}{numero_es(abs(x), 2)}%"
 
 
 def direccion(x):
-    return "up" if x > 0.0001 else ("down" if x < -0.0001 else "flat")
+    return "up" if x > 0.004 else ("down" if x < -0.004 else "flat")
 
 
 def descargar(simbolo):
+    """Devuelve (serie, fecha, precio, previo, cerrado).
+
+    El precio sale de regularMarketPrice: la barra diaria del día en curso puede
+    venir vacía aunque el mercado ya haya cerrado. El cierre previo es el último
+    cierre con fecha anterior a la de la sesión.
+    """
     url = ("https://query1.finance.yahoo.com/v8/finance/chart/"
            + urllib.parse.quote(simbolo) + "?range=1mo&interval=1d")
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -65,21 +110,33 @@ def descargar(simbolo):
         datos = json.load(r)
     res = datos["chart"]["result"][0]
     meta = res["meta"]
-    tz = timedelta(seconds=meta.get("gmtoffset", -18000))
-    serie = []
-    for ts, c in zip(res["timestamp"], res["indicators"]["quote"][0]["close"]):
-        if c is None:
-            continue
-        fecha = datetime.fromtimestamp(ts, timezone(tz)).strftime("%Y-%m-%d")
-        if serie and serie[-1][0] == fecha:
-            serie[-1] = (fecha, c)
-        else:
-            serie.append((fecha, c))
-    if len(serie) < 2:
-        raise ValueError("serie demasiado corta")
+    tz = timezone(timedelta(seconds=meta.get("gmtoffset", -18000)))
+
+    def dia(ts):
+        return datetime.fromtimestamp(ts, tz).strftime("%Y-%m-%d")
+
+    serie = {}
+    for ts, c in zip(res.get("timestamp", []), res["indicators"]["quote"][0].get("close", [])):
+        if c is not None:
+            serie[dia(ts)] = c
+
+    precio = meta.get("regularMarketPrice")
+    t = meta.get("regularMarketTime")
+    if precio is not None and t:
+        fecha = dia(t)
+    elif serie:
+        fecha = max(serie)
+        precio = serie[fecha]
+    else:
+        raise ValueError("sin datos")
+
+    anteriores = sorted((d, c) for d, c in serie.items() if d < fecha)
+    if not anteriores:
+        raise ValueError("sin cierre previo")
+    previo = anteriores[-1][1]
     fin_sesion = meta.get("currentTradingPeriod", {}).get("regular", {}).get("end", 0)
     cerrado = time.time() >= fin_sesion
-    return serie, cerrado
+    return anteriores + [(fecha, precio)], fecha, precio, previo, cerrado
 
 
 def sparkline(valores, ancho=120, alto=32):
@@ -101,26 +158,25 @@ def sparkline(valores, ancho=120, alto=32):
     }
 
 
-def armar(simbolo, nombre, extra, previos, dec=2, con_serie=False, limite=None):
+def armar(simbolo, nombre, previos, extra=None, dec=2, con_serie=False, limite=None):
     try:
-        serie, cerrado = descargar(simbolo)
+        serie, fecha, precio, previo, cerrado = descargar(simbolo)
     except Exception as e:  # noqa: BLE001
         print(f"AVISO: {simbolo} falló ({e}); se mantiene el valor anterior", file=sys.stderr)
         return previos.get(simbolo), None
-    (_, previo), (fecha, ultimo) = serie[-2], serie[-1]
-    cambio = (ultimo / previo - 1) * 100
+    cambio = (precio / previo - 1) * 100
     item = {
         "simbolo": simbolo, "nombre": nombre, "fecha": fecha,
-        "valor": round(ultimo, 4), "valor_txt": numero_es(ultimo, dec),
+        "valor": round(precio, 4), "valor_txt": numero_es(precio, dec),
         "cambio_pct": round(cambio, 4), "cambio_txt": pct_es(cambio),
         "dir": direccion(cambio), "cerrado": cerrado,
     }
+    if extra:
+        item["detalle"] = extra
     if limite is not None and abs(cambio) > limite:
         # Movimiento diario fuera de lo normal: puede ser un dato erróneo de la fuente.
         item["atipico"] = True
         print(f"AVISO: {simbolo} varió {cambio:.2f}% en un día; se marca como dato atípico", file=sys.stderr)
-    if extra:
-        item["detalle"] = extra
     if con_serie:
         ultimos = serie[-22:]
         item["sparkline"] = sparkline([v for _, v in ultimos])
@@ -132,14 +188,16 @@ def main():
     previos = {}
     if SALIDA.exists():
         viejo = json.loads(SALIDA.read_text(encoding="utf-8"))
-        for grupo in ("indices", "adrs", "monedas"):
-            for it in viejo.get(grupo, []):
-                previos[it["simbolo"]] = it
+        items = viejo.get("indices", []) + viejo.get("monedas", [])
+        for g in viejo.get("grupos", []):
+            items += g.get("acciones", []) + ([g["referencia"]] if g.get("referencia") else [])
+        for it in items:
+            previos[it["simbolo"]] = it
 
-    salida = {"indices": [], "adrs": [], "monedas": []}
+    salida = {"indices": [], "grupos": [], "monedas": []}
     sesion = None
     for s, n in INDICES:
-        it, info = armar(s, n, None, previos, con_serie=True)
+        it, info = armar(s, n, previos, con_serie=True)
         if it:
             salida["indices"].append(it)
         if info and sesion is None:
@@ -147,12 +205,22 @@ def main():
     if sesion is None:
         print("ERROR: no se pudo descargar ningún índice; no se modifica el archivo", file=sys.stderr)
         sys.exit(1)
-    for s, n, pais in ADRS:
-        it, _ = armar(s, n, pais, previos)
-        if it:
-            salida["adrs"].append(it)
+
+    for g in GRUPOS:
+        grupo = {"id": g["id"], "titulo": g["titulo"], "nota": g["nota"], "acciones": []}
+        if g["referencia"]:
+            s, n, dec = g["referencia"]
+            ref, _ = armar(s, n, previos, dec=dec)
+            if ref:
+                grupo["referencia"] = ref
+        for s, n in g["acciones"]:
+            it, _ = armar(s, n, previos)
+            if it:
+                grupo["acciones"].append(it)
+        salida["grupos"].append(grupo)
+
     for s, n, par in MONEDAS:
-        it, _ = armar(s, n, par, previos, dec=2, limite=3)
+        it, _ = armar(s, n, previos, extra=par, limite=3)
         if it:
             salida["monedas"].append(it)
 

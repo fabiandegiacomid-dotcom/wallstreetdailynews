@@ -19,7 +19,7 @@ body_class: links-page
   </div>
   <p class="when">{{ m.estado }} · {{ m.fecha_texto }}</p>
 
-  <a class="link-btn primary" href="{{ '/' | relative_url }}"><strong>Reporte de hoy</strong><span>Índices, ADR sudamericanos y el dólar en la región</span></a>
+  <a class="link-btn primary" href="{{ '/' | relative_url }}"><strong>Reporte de hoy</strong><span>Índices, 7 Magníficas, Chile, Brasil, Argentina y el dólar</span></a>
   {% if ultima %}<a class="link-btn" href="{{ ultima.url | relative_url }}"><strong>{{ ultima.title }}</strong><span>Última noticia</span></a>{% endif %}
   {% if papers.first %}<a class="link-btn" href="{{ papers.first.url | relative_url }}"><strong>{{ papers.first.title }}</strong><span>Último paper</span></a>{% endif %}
   <a class="link-btn" href="{{ '/noticias/' | relative_url }}"><strong>Todas las noticias</strong><span>Archivo completo</span></a>

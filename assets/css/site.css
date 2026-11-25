@@ -181,3 +181,12 @@ select { font: inherit; padding: .45rem .6rem; background: var(--surface); color
   .indices { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+/* Grupos de acciones */
+.grupos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem 2.5rem; }
+.grupo { min-width: 0; display: grid; gap: .6rem; align-content: start; }
+.grupo h3 { font-size: 1.15rem; font-weight: 700; }
+tr.ref td { background: var(--accent-soft); font-weight: 600; }
+.cols .hours-out { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { .grupos { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .cols .hours-out { grid-template-columns: 1fr; } }

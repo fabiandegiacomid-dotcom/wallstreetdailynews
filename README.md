@@ -11,7 +11,7 @@ Sitio de reportes de Wall Street y el Nasdaq para Sudamérica.
 - Jekyll, publicado con GitHub Pages.
 - `.github/workflows/sitio.yml` corre de lunes a viernes a las 21:45 UTC. Ejecuta `scripts/actualizar_mercado.py`, que descarga los cierres de Yahoo Finance (sin clave de API), guarda `_data/mercado.json` y vuelve a publicar el sitio.
 - Cada push a `main` (una noticia o un paper nuevo) también vuelve a publicar el sitio.
-- Para cambiar los ADR o las monedas, editá las listas al principio de `scripts/actualizar_mercado.py`.
+- Para cambiar las acciones (`GRUPOS`) o las monedas (`MONEDAS`), editá las listas al principio de `scripts/actualizar_mercado.py`.
 - Si una moneda varía más de 3% en un día, se muestra como "dato atípico" en lugar de publicar la variación.
 
 ## Puesta en marcha
