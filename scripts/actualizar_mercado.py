@@ -106,8 +106,15 @@ def descargar(simbolo):
     url = ("https://query1.finance.yahoo.com/v8/finance/chart/"
            + urllib.parse.quote(simbolo) + "?range=1mo&interval=1d")
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        datos = json.load(r)
+    for intento in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as r:
+                datos = json.load(r)
+            break
+        except Exception:  # noqa: BLE001
+            if intento == 2:
+                raise
+            time.sleep(5 * (intento + 1))
     res = datos["chart"]["result"][0]
     meta = res["meta"]
     tz = timezone(timedelta(seconds=meta.get("gmtoffset", -18000)))
@@ -186,6 +193,7 @@ def armar(simbolo, nombre, previos, extra=None, dec=2, con_serie=False, limite=N
 
 def main():
     previos = {}
+    viejo = {}
     if SALIDA.exists():
         viejo = json.loads(SALIDA.read_text(encoding="utf-8"))
         items = viejo.get("indices", []) + viejo.get("monedas", [])
@@ -231,6 +239,12 @@ def main():
     salida["estado"] = "Cierre" if cerrado else "En curso"
     salida["actualizado"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     salida["fuente"] = "Yahoo Finance"
+
+    # Si los precios no cambiaron (feriado o ejecución de respaldo), no se toca el archivo.
+    sin_hora = lambda d: {k: v for k, v in d.items() if k != "actualizado"}  # noqa: E731
+    if viejo and sin_hora(viejo) == sin_hora(salida):
+        print(f"Sin cambios: los datos de la sesión {salida['fecha_sesion']} ya estaban guardados")
+        return
 
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

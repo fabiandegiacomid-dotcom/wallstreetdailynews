@@ -4,9 +4,13 @@ on:
   # Cada vez que alguien publica una noticia o un paper.
   push:
     branches: [main]
-  # De lunes a viernes a las 21:45 UTC (después del cierre de Nueva York todo el año).
+  # De lunes a viernes después del cierre de Nueva York (todo el año).
+  # 21:45 UTC es la actualización principal; las otras dos son respaldo por si
+  # GitHub atrasa o salta una ejecución. Si los datos no cambiaron, no hacen nada nuevo.
   schedule:
     - cron: "45 21 * * 1-5"
+    - cron: "30 23 * * 1-5"
+    - cron: "15 2 * * 2-6"
   # Botón "Run workflow" en la pestaña Actions, para actualizar a mano.
   workflow_dispatch:
 

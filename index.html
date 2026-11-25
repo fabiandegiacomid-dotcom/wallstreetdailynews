@@ -118,7 +118,7 @@ title: Reporte del día
         <div class="hours-out" aria-live="polite">
           <div class="hbox"><span class="eyebrow">Apertura</span><span class="num" id="h-open">11:30</span></div>
           <div class="hbox"><span class="eyebrow">Cierre</span><span class="num" id="h-close">18:00</span></div>
-          <div class="hbox"><span class="eyebrow">Diferencia</span><span class="num" id="h-diff">+2 horas</span></div>
+          <div class="hbox"><span class="eyebrow">Diferencia</span><span class="num" id="h-diff">2 horas</span></div>
         </div>
         <p class="table-note">Se calcula con la fecha de hoy, así que tiene en cuenta los cambios de horario de verano.</p>
       </div>
@@ -167,7 +167,7 @@ title: Reporte del día
     document.getElementById("h-open").textContent = hhmm(9 * 60 + 30 + diff);
     document.getElementById("h-close").textContent = hhmm(16 * 60 + diff);
     var h = diff / 60;
-    document.getElementById("h-diff").textContent = h === 0 ? "Misma hora" : (h > 0 ? "+" : "−") + Math.abs(h) + (Math.abs(h) === 1 ? " hora" : " horas");
+    document.getElementById("h-diff").textContent = h === 0 ? "Misma hora" : Math.abs(h) + (Math.abs(h) === 1 ? " hora" : " horas");
     try { localStorage.setItem("wsdn-pais", sel.value); } catch (e) {}
   }
   try { var s = localStorage.getItem("wsdn-pais"); if (s !== null && paises[+s]) sel.value = s; } catch (e) {}
