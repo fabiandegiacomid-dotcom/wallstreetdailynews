@@ -322,7 +322,7 @@
         "cambio_pct": 1.5812,
         "cambio_txt": "+1,58%",
         "dir": "up",
-        "cerrado": true
+        "cerrado": false
       }
     },
     {
@@ -462,19 +462,20 @@
     {
       "simbolo": "PEN=X",
       "nombre": "Sol peruano",
-      "fecha": "2026-11-25",
-      "valor": 3.4728,
-      "valor_txt": "3,47",
-      "cambio_pct": 0.5443,
-      "cambio_txt": "+0,54%",
+      "fecha": "2026-11-26",
+      "valor": 3.4648,
+      "valor_txt": "3,46",
+      "cambio_pct": 3.4658,
+      "cambio_txt": "+3,47%",
       "dir": "up",
       "cerrado": false,
-      "detalle": "USD/PEN"
+      "detalle": "USD/PEN",
+      "atipico": true
     }
   ],
   "fecha_sesion": "2026-11-25",
   "fecha_texto": "miércoles 25 de noviembre de 2026",
   "estado": "Cierre",
-  "actualizado": "2026-11-26T00:15:29Z",
+  "actualizado": "2026-11-26T03:08:01Z",
   "fuente": "Yahoo Finance"
 }
