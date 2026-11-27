@@ -322,7 +322,7 @@
         "cambio_pct": 6.0682,
         "cambio_txt": "+6,07%",
         "dir": "up",
-        "cerrado": true
+        "cerrado": false
       }
     },
     {
@@ -426,36 +426,35 @@
     {
       "simbolo": "BRL=X",
       "nombre": "Real brasileño",
-      "fecha": "2026-11-26",
+      "fecha": "2026-11-27",
       "valor": 5.6513,
       "valor_txt": "5,65",
-      "cambio_pct": -4.2801,
-      "cambio_txt": "−4,28%",
+      "cambio_pct": -2.9303,
+      "cambio_txt": "−2,93%",
       "dir": "down",
       "cerrado": false,
-      "detalle": "USD/BRL",
-      "atipico": true
+      "detalle": "USD/BRL"
     },
     {
       "simbolo": "ARS=X",
       "nombre": "Peso argentino (oficial)",
-      "fecha": "2026-11-26",
+      "fecha": "2026-11-27",
       "valor": 1601.0,
       "valor_txt": "1.601,00",
-      "cambio_pct": 0.5342,
-      "cambio_txt": "+0,53%",
-      "dir": "up",
+      "cambio_pct": -0.1245,
+      "cambio_txt": "−0,12%",
+      "dir": "down",
       "cerrado": false,
       "detalle": "USD/ARS"
     },
     {
       "simbolo": "COP=X",
       "nombre": "Peso colombiano",
-      "fecha": "2026-11-26",
+      "fecha": "2026-11-27",
       "valor": 3547.19,
       "valor_txt": "3.547,19",
-      "cambio_pct": -2.0278,
-      "cambio_txt": "−2,03%",
+      "cambio_pct": -0.294,
+      "cambio_txt": "−0,29%",
       "dir": "down",
       "cerrado": false,
       "detalle": "USD/COP"
@@ -464,10 +463,10 @@
       "simbolo": "PEN=X",
       "nombre": "Sol peruano",
       "fecha": "2026-11-27",
-      "valor": 3.4701,
+      "valor": 3.4665,
       "valor_txt": "3,47",
-      "cambio_pct": 3.1725,
-      "cambio_txt": "+3,17%",
+      "cambio_pct": 3.0654,
+      "cambio_txt": "+3,07%",
       "dir": "up",
       "cerrado": false,
       "detalle": "USD/PEN",
@@ -477,6 +476,6 @@
   "fecha_sesion": "2026-11-25",
   "fecha_texto": "miércoles 25 de noviembre de 2026",
   "estado": "Cierre",
-  "actualizado": "2026-11-27T00:23:01Z",
+  "actualizado": "2026-11-27T03:11:52Z",
   "fuente": "Yahoo Finance"
 }
