@@ -420,7 +420,7 @@
       "cambio_pct": -0.7193,
       "cambio_txt": "−0,72%",
       "dir": "down",
-      "cerrado": false,
+      "cerrado": true,
       "detalle": "USD/CLP"
     },
     {
@@ -432,7 +432,7 @@
       "cambio_pct": -4.5294,
       "cambio_txt": "−4,53%",
       "dir": "down",
-      "cerrado": false,
+      "cerrado": true,
       "detalle": "USD/BRL",
       "atipico": true
     },
@@ -445,7 +445,7 @@
       "cambio_pct": 0.125,
       "cambio_txt": "+0,13%",
       "dir": "up",
-      "cerrado": false,
+      "cerrado": true,
       "detalle": "USD/ARS"
     },
     {
@@ -457,7 +457,7 @@
       "cambio_pct": -2.3656,
       "cambio_txt": "−2,37%",
       "dir": "down",
-      "cerrado": false,
+      "cerrado": true,
       "detalle": "USD/COP"
     },
     {
@@ -469,7 +469,7 @@
       "cambio_pct": 3.1457,
       "cambio_txt": "+3,15%",
       "dir": "up",
-      "cerrado": false,
+      "cerrado": true,
       "detalle": "USD/PEN",
       "atipico": true
     }
@@ -477,6 +477,6 @@
   "fecha_sesion": "2026-11-27",
   "fecha_texto": "viernes 27 de noviembre de 2026",
   "estado": "Cierre",
-  "actualizado": "2026-11-27T22:35:40Z",
+  "actualizado": "2026-11-28T00:16:52Z",
   "fuente": "Yahoo Finance"
 }
